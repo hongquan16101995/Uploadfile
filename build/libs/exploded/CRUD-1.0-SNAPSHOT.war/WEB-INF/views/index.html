@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<table id = "customers">
+<table id="customers">
     <thead>
     <tr>
         <th>ID</th>
@@ -24,8 +24,6 @@
         <th>Email</th>
         <th>Address</th>
         <th>Avatar</th>
-        <th>Edit</th>
-        <th>Delete</th>
         <th>View</th>
     </tr>
     </thead>
@@ -36,8 +34,6 @@
         <td th:text="${row.getEmail()}"></td>
         <td th:text="${row.getAddress()}"></td>
         <td><img th:src="@{'/i/'+ ${row.getImage()}}" width="100" height="100" alt="Khongcoanh"/></td>
-        <td><a th:href="@{/customer/{id}/edit(id=${row.getId()})}">Edit</a></td>
-        <td><a th:href="@{/customer/{id}/delete(id=${row.getId()})}">Delete</a></td>
         <td><a th:href="@{/customer/{id}/view(id=${row.getId()})}">View</a></td>
     </tr>
     </tbody>

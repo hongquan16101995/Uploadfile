@@ -10,8 +10,4 @@ public interface CustomerService {
     void save(Customer customer);
 
     Customer findById(int id);
-
-    void update(Customer customer);
-
-    void remove(int id);
 }

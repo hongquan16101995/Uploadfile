@@ -10,7 +10,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     static {
         customers = new ArrayList<>();
-        customers.add(new Customer(1,"Hiếu", "hieu@gmail.com", "hà nội", "a.jpg"));
+        customers.add(new Customer(1,"nguyen trung hieu", "hieu@gmail.com", "HN", "a.jpg"));
     }
 
     @Override
@@ -26,19 +26,5 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public Customer findById(int id) {
         return customers.stream().filter(c -> c.getId() == (id)).findFirst().orElse(null);
-    }
-
-    @Override
-    public void update(Customer customer) {
-        Customer customer1 = findById(customer.getId());
-        customer1.setName(customer.getName());
-        customer1.setEmail(customer.getEmail());
-        customer1.setAddress(customer.getAddress());
-        customer1.setAddress(customer.getImage());
-    }
-
-    @Override
-    public void remove(int id) {
-        customers.removeIf(c -> c.getId() == (id));
     }
 }

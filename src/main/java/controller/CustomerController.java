@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("customer")
 public class CustomerController {
     @Autowired
     public CustomerService customerService;
@@ -26,18 +25,18 @@ public class CustomerController {
     @Autowired
     public Environment environment;
 
-    @GetMapping
+    @GetMapping("/customer")
     public ModelAndView showlistCustomer() {
         List<Customer> customerList = customerService.findAll();
         return new ModelAndView("/index", "customers", customerList);
     }
 
-    @GetMapping("/create")
+    @GetMapping("/customer/create")
     public ModelAndView createCustomer() {
         return new ModelAndView("/create", "customer", new CustomerForm());
     }
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/customer/create")
     public ModelAndView createCustomer(@ModelAttribute("customer") CustomerForm customerForm, Model model){
         MultipartFile file = customerForm.getImage();
         String image = file.getOriginalFilename();
@@ -53,34 +52,7 @@ public class CustomerController {
         return showlistCustomer();
     }
 
-    @GetMapping("/{id}/edit")
-    public ModelAndView edit(@PathVariable int id) {
-        Customer customer = customerService.findById(id);
-        return new ModelAndView("/edit", "customer", customer);
-    }
-
-    @PostMapping("/update")
-    public ModelAndView update(@ModelAttribute("customer") Customer customer, Model model) {
-        customerService.update(customer);
-        model.addAttribute("success", "Modified customer successfully!");
-        List<Customer> customerList = customerService.findAll();
-        return new ModelAndView("/index", "customers", customerList);
-    }
-
-    @GetMapping("/{id}/delete")
-    public ModelAndView delete(@PathVariable int id) {
-        Customer customer = customerService.findById(id);
-        return new ModelAndView("/delete", "customer", customer);
-    }
-
-    @PostMapping("/remove")
-    public ModelAndView remove(@ModelAttribute Customer customer, Model model) {
-        customerService.remove(customer.getId());
-        model.addAttribute("success", "Removed customer successfully!");
-        return showlistCustomer();
-    }
-
-    @GetMapping("/{id}/view")
+    @GetMapping("/customer/{id}/view")
     public ModelAndView view(@PathVariable int id) {
         Customer customer = customerService.findById(id);
         return new ModelAndView("/view", "customer", customer);
